@@ -1,0 +1,226 @@
+
+ul {
+  list-style-type: none;
+}
+.ciscoBlueBackground {
+  background-color: #049FD9;
+  color: #ffffff;
+}
+.error {
+  background-color: #ff3232 !important;
+}
+.table tbody > tr.error {
+  background-color: #ff6666 !important;
+}
+.table-hover tbody > tr:hover.error {
+  background-color: #ff3232 !important;
+}
+
+.ciscoBlueColor {
+  color: #049FD9;
+  background-color: #ffffff;
+}
+.box {
+      border: 1px solid black;
+}
+.center {
+  text-align: center;
+}
+.boldRed {
+  color: red;
+  font-weight: bold;
+  font-size: 1.2e;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+.loginbox {
+  border: 10px solid grey;
+  background-color: #049FD9;
+}
+#createButton{
+  margin-top: 10px;
+}
+.title {
+  margin-top: 100px;
+  font-size: 300%;
+}
+.marginBottom {
+  margin-bottom: 30px;
+}
+.paddingLeft{
+   padding-left: 10px;
+}
+.paddingRight {
+  padding-right: 10px;
+}
+.paddingbottom {
+  padding-bottom: 10px;
+}
+.logo {
+  color: #FFFFFF;
+  font-family:verdana;
+  font-size: 100%
+}
+
+.hidden {
+   visibility: hidden
+}
+.navbar .navbar-toggle {
+    background-color: white;
+}
+.navbar .navbar-toggle .icon-bar {
+    background-color: #049FD9;
+}
+.navbar-toggle:hover {
+  background-color: lightgray;
+}
+.left-pad {
+  padding-left: 1em;
+}
+
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin .normPassword {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.form-signin .confPassword {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.cd-accordion-menu li {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.cd-accordion-menu input[type=checkbox] {
+  /* hide native checkbox */
+  position: absolute;
+  opacity: 0;
+}
+.cd-accordion-menu label {
+  position: relative;
+  display: block;
+  padding: 18px 18px 18px 64px;
+  background: #049FD9;
+  color: #ffffff;
+  /* box-shadow: inset 0 -1px #555960; */
+  font-size: 1.6rem;
+  border-radius: 25px;
+}
+.no-touch .cd-accordion-menu label:hover {
+  background: #52565d;
+}
+.cd-accordion-menu label {
+  cursor: pointer;
+}
+.cd-accordion-menu input[type=checkbox]:checked + label + ul,
+.cd-accordion-menu input[type=checkbox]:checked + label:nth-of-type(n) + ul {
+  /* use label:nth-of-type(n) to fix a bug on safari (<= 8.0.8) with multiple adjacent-sibling selectors*/
+  /* show children when item is checked */
+  display: block;
+}
+.cd-accordion-menu ul label {
+  background: #004BAF;
+  /* box-shadow: inset 0 -1px #41444a; */
+  padding-left: 82px;*/
+}
+.cd-accordion-menu ul label::before {
+  left: 36px;
+}
+.cd-accordion-menu ul label::after {
+  left: 59px;
+}
+.cd-accordion-menu ul ul label{
+  padding-left: 100px;
+}
+.cd-accordion-menu ul ul label::before {
+  left: 54px;
+}
+.cd-accordion-menu ul ul label::after {
+  left: 77px;
+}
+.cd-accordion-menu ul ul ul label{
+  padding-left: 118px;
+}
+.cd-accordion-menu ul ul ul label::before {
+  left: 72px;
+}
+.cd-accordion-menu ul ul ul label::after{
+  left: 95px;
+}
+@media only screen and (min-width: 600px) {
+  .cd-accordion-menu label {
+    padding: 24px 24px 24px 82px;
+    font-size: 1.9rem;
+  }
+  .cd-accordion-menu label::before {
+    left: 24px;
+  }
+  .cd-accordion-menu label::after {
+    left: 53px;
+  }
+  .cd-accordion-menu ul label {
+    padding-left: 106px;
+  }
+  .cd-accordion-menu ul label::before {
+    left: 48px;
+  }
+  .cd-accordion-menu ul label::after {
+    left: 77px;
+  }
+  .cd-accordion-menu ul ul label {
+    padding-left: 130px;
+  }
+  .cd-accordion-menu ul ul label::before {
+    left: 72px;
+  }
+  .cd-accordion-menu ul ul label::after {
+    left: 101px;
+  }
+  .cd-accordion-menu ul ul ul label {
+    padding-left: 154px;
+  }
+  .cd-accordion-menu ul ul ul label::before {
+    left: 96px;
+  }
+  .cd-accordion-menu ul ul ul label::after {
+    left: 125px;
+  }
+}
+.cd-accordion-menu.animated label::before {
+  /* this class is used if you're using jquery to animate the accordion */
+  -webkit-transition: -webkit-transform 0.3s;
+  -moz-transition: -moz-transform 0.3s;
+  transition: transform 0.3s;
+}

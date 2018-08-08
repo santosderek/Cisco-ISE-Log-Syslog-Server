@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{%block navigation%}
+
+<div class="collapse navbar-collapse ">
+  <form class="navbar-form navbar-right form-inline " method="post">
+      <label class="ciscoBlueBackground paddingRight" type="password" name="currentUser"> {{current_user}}</label>
+      <div class="form-group">
+        <button type="submit" id="logout" name="submit" value="logoutButton" class="btn ciscoBlueColor">Log Out</button>
+      </div>
+      {% if admin_login == True %}
+      <div class="form-group paddingLeft" action="/admin/">
+        <button type="submit" id="admin" name="submit" value="admin" class="btn ciscoBlueColor">Admin</button>
+      </div>
+      {% endif %}
+  </form>
+</div>
+
+{%endblock%}
+
+{%block body%}
+
+<!-- <div>
+  <form class="navbar-form navbar-right" method="post">
+        <div class="form-group">
+
+  </form>
+</div> -->
+<div class="container contentContainer">
+  <div id="aboutArea">
+    <div class="row">
+      <div class="center">
+        <div class="col-lg-12">
+          <form method="post">
+            <div class="input-group input-group-lg">
+              <input type="text" name="macAddressField" class="form-control input-lg" placeholder="MAC Address" />
+              <span class="input-group-btn">
+                <button type="submit" value="macAddressSearchButton" name="submit" id="macSubmitID"class="btn ciscoBlueBackground center btn-lg">Submit</button>
+              </span>
+            </div>
+          </form>
+        <!-- <form method="post">
+              <div class="form-group">
+                <input type="text" name="macAddressField" class="form-control" placeholder="MAC Address"/>
+              </div>
+              <button type="submit" value="macAddressSearchButton" name="submit" id="macSubmitID"class="btn ciscoBlueBackground center">Submit</button>
+        </form> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%endblock%}

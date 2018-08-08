@@ -1,0 +1,29 @@
+{
+
+  "SearchResult" : {
+
+    "total" : 1,
+
+    "resources" : [ {
+
+      "id" : "55c1b32f-9a89-4969-9ba2-151c8b03d3f1",
+
+      "name" : "admin",
+
+      "description" : "Default Admin User",
+
+      "link" : {
+
+        "rel" : "self",
+
+        "href" : "https://198.18.133.27:9060/ers/config/adminuser/55c1b32f-9a89-4969-9ba2-151c8b03d3f1",
+
+        "type" : "application/xml"
+
+      }
+
+    } ]
+
+  }
+
+}

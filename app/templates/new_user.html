@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{%block navigation%}
+
+<div class="collapse navbar-collapse">
+  <form class="navbar-form navbar-right form-inline" method="post">
+      <label class="ciscoBlueBackground paddingRight" type="password" name="currentUser"> {{current_user}}</label>
+      <div class="form-group">
+        <button type="submit" id="logout" name="submit" value="logoutButton" class="btn ciscoBlueColor">Log Out</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{%endblock%}
+
+{%block body%}
+
+<!-- <div>
+  <form class="navbar-form navbar-right" method="post">
+        <div class="form-group">
+
+  </form>
+</div> -->
+<div class="container contentContainer">
+  <h1>Welcome</h1>
+  <h3>Please wait until admin gives you access</h3>
+  <h4>This could be awhile</h4>
+</div>
+
+{%endblock%}

@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+
+{%block navigation%}
+
+<div class="collapse navbar-collapse">
+  <form class="navbar-form navbar-right form-inline" method="post">
+    <div id="Authentication">
+
+      <div class="form-group">
+        <input name="email" id="emailLogin" type="email" class="form-control" placeholder="Email address"/>
+        <input type="password" id="passwordLogin" name="password" class="form-control" placeholder="Password"/>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" id="login" name="submit" value="loginButton" class="btn ciscoBlueColor">Log In</button>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+{%endblock%}
+
+{%block body%}
+
+
+<div class="container contentContainer">
+  <form class="form-signin" id="newUserForm" method="post">
+    <h1 class="h3 mb-3 font-weight-normal">Create an account</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="newEmail" name="newEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+
+    <label for="newPassword" class="sr-only">Password</label>
+    <input type="password" id="newPassword" name="newPassword" class="form-control normPassword" placeholder="Password" required="">
+
+    <label for="inputPassword" class="sr-only">Confirm Password</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" class="form-control confPassword" placeholder="Confirm Password" required="">
+
+    <!--  <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div> -->
+    <button class="btn btn-lg ciscoBlueBackground btn-block" id="createButton" name="submit" value="createAccountButton" type="submit">Create</button>
+  </form>
+  <h4 class="boldRed center "style="display:{{user_already_exists}}">user already exists</h4>
+  <h4 class="boldRed center "style="display:{{failed_login}}">Failed Login Attempt</h4>
+
+</div>
+
+<script>
+var auth_data =[];
+var authJSONURL = "{{url_for('static',filename='config.json')}}";
+
+$( document ).ready(function() {
+  // $.getJSON(authJSONURL, function (data) {
+  //   console.log(data)
+  //     $.each(data, function (index, value) {
+  //       $.each(value, function (index2, value2) {
+  //        console.log(index+" : "+index2+" : "+value2);
+  //      });
+  //     });
+  //     auth_data=data;
+  //     console.log(auth_data);
+  //
+  //
+  $(function() {
+    $("#newUserForm").validate({
+        rules: {
+          newEmail: {
+              required: true,
+              email: true
+          },
+            newPassword: {
+                required: true,
+                //disabled for debug
+                pwcheck: true,
+                minlength: 8
+            },
+            confirmPassword: {
+                required: true,
+                equalTo: "#newPassword"
+            },
+        },
+        messages: {
+            newEmail: {
+              required: "Email address required",
+              email: "must be a valid email"
+            },
+            newPassword: {
+                required: "password is required",
+                pwcheck: "password must have include at least 1 lowercase, 1 uppercase, and 1 number",
+                minlength: "password must be at least 8 characters, "
+            },
+            confirmPassword: {
+                required: "confirm password please",
+                equalTo: "passwords do not match"
+            }
+        }
+    });
+
+    $.validator.addMethod("pwcheck", function(value) {
+       return /^[A-Za-z0-9\d=!\-@._*]*$/.test(value) // consists of only these
+           && /[a-z]/.test(value) // has a lowercase letter
+           && /\d/.test(value) // has a digit
+           && /[A-Z]/.test(value) // has a uppercase letter
+    });
+  });
+});
+
+// potential future way to do it
+
+$( "#createButton" ).click(function() {
+  var email = $("#newEmail").val();
+  var password = $("#newPassword").val();
+  var cpassword = $("#confirmPassword").val();
+  console.log(email);
+  console.log(password);
+  console.log(cpassword);
+
+  return true;
+});
+
+function createNewUserCheck(email, password, cpassword){
+  if(!email || !password || !cpassword){
+    console.log("fields not filled");
+    return false;
+  }
+
+  $.each(auth_data, function (index, value) {
+    if(index==email){
+      console.log("email exists");
+      return false;
+    }
+  });
+  if (password!=cpassword){
+    console.log("passwords dont match");
+    return false;
+  }
+  console.log("new user success");
+
+  return true;
+}
+
+$( "#login" ).click(function() {
+  console.log($("#emailLogin").val());
+  console.log($("#passwordLogin").val());
+});
+
+</script>
+
+{%endblock%}

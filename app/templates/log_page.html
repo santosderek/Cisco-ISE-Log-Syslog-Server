@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{%block navigation%}
+
+
+<div class="collapse navbar-collapse ">
+  <form class="navbar-form navbar-right form-inline " method="post">
+      <label class="ciscoBlueBackground paddingRight" type="password" name="currentUser"> {{current_user}}</label>
+      <div class="form-group">
+        <button type="submit" id="logout" name="submit" value="logoutButton" class="btn ciscoBlueColor">Log Out</button>
+      </div>
+      {% if admin_login == True %}
+      <div class="form-group paddingLeft">
+        <button type="submit" id="admin" name="submit" value="admin" class="btn ciscoBlueColor">Admin</button>
+      </div>
+      {% endif %}
+  </form>
+</div>
+
+{%endblock%}
+
+{%block body%}
+
+    <div class="container contentContainer">
+      <div class="row paddingbottom">
+        <div class="col-lg-12">
+          <form method="post">
+            <div class="input-group input-group-lg">
+              <input type="text" name="macAddressField" class="form-control input-lg" placeholder="MAC Address" />
+              <span class="input-group-btn">
+                <button type="submit" value="macAddressSearchButton" name="submit" id="macSubmitID"class="btn ciscoBlueBackground center btn-lg">Submit</button>
+              </span>
+            </div>
+          </form>
+          <form id="toggle">
+              <input type="Button" class="btn btn-sm ciscoBlueBackground center" id="collapseAllButton" value="Collapse all" />
+              <input type="Button" class="btn btn-sm ciscoBlueBackground center" id="expandAllButton" value="Expand all" />
+          </form>
+        </div>
+      </div>
+        <div class="col-lg-12">
+          <ul class="cd-accordion-menu animated">
+            {% for device in device_group.list_of_devices %}
+            <!-- level 1 -->
+            <li class="has-children">
+            <input type="checkbox" class="allFields" name ="group-{{device.position_in_list}}" id="group-{{device.position_in_list}}">
+            <label for="group-{{device.position_in_list}}">{{device.ip_address}} </label>
+              {% for log in device.logs %}
+              <ul>
+                <li class="has-children">
+
+                  {% set severity_of_log = log['severity_of_log'] %}
+                  {% set timestamp = log['Time'] %}
+                  {% set failed_step = log.items()[0] %}
+
+                  <input type="checkbox" class="allFields" name ="sub-group-{{log['position_in_list']}}" id="sub-group-{{log['position_in_list']}}">
+                  <label class={{severity_of_log}} for="sub-group-{{log['position_in_list']}}">{{timestamp}} | {{failed_step}}</label>
+                  <!-- <label for="sub-group-{{log['position_in_list']}}">{{timestamp}}</label> -->
+
+                  <ul>
+
+                    <table class="table table-striped table-responsive table-hover">
+                      <thead class="thead-light">
+                        <tr>
+                        <th scope="col">KEY</th>
+                        <th scope="col">VALUE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                    {% for key, value in log.items() %}
+                      <li>
+                            {% set split_key2 = key.split('_') %}
+                            {% set class_code = '' %}
+                            {% set severity_code = '' %}
+                            {% if split_key2[0] == 'Step' and split_key2[1] in step_codes %}
+                              {% if step_codes[split_key2[1]][3].lower()  == 'error' or step_codes[split_key2[1]][3].lower()[:4] == 'warn' %}
+                                {% set class_code = 'error' %}
+                              {%endif%}
+                              {% if not value == 'UNKNOWN'%}
+                                {% set severity_code = step_codes[split_key2[1]][3].upper() + ' : '%}
+                              {%endif%}
+                            {%endif%}
+                            <!-- {% if key == 'Last Step' %}
+                              {% set last_step = value[5:5] %}
+                              {% if last_step in step_codes%}
+                                {% if step_codes[last_step][3].lower()  == 'error' or step_codes[last_step][3].lower()[:4] == 'warn' %}
+                                  {% set class_code = 'error' %}
+                                {%endif%}
+                                {{value[11:]}}
+                                {% if not value[11:] == 'UNKNOWN'%}
+                                  {% set severity_code = step_codes[split_key2[1]][3].upper() + ' : '%}
+                                {%endif%}
+                              {%endif%}
+                            {%endif%} -->
+                            <tr class = {{class_code}} >
+                              <td>{{key}}</td>
+                              <td>{{severity_code}}{{value}} </td>
+                            </tr>
+                      </li>
+                    {% endfor %}
+                    </tbody>
+                    </table>
+                  </ul>
+                </li>
+              </ul>
+              {% endfor %}
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <script>
+        jQuery(document).ready(function(){
+
+
+          var accordionsMenu = $('.cd-accordion-menu');
+          var collapseAll = $('#collapseAllButton');
+
+          if( accordionsMenu.length > 0 ) {
+
+            $('.cd-accordion-menu :input[type="checkbox"]').each(function(){
+              var checkbox = $(this);
+              console.log(checkbox.prop('checked'));
+              checkbox.prop('checked', false);
+              console.log(checkbox.prop('checked'));
+              checkbox.siblings('ul').attr('style', 'display:none;').slideUp(300);
+            });
+
+
+            $('#collapseAllButton').on('click', function(){
+                //detect change in the input[type="checkbox"] value
+                $('.cd-accordion-menu :input[type="checkbox"]').each(function(){
+                  var checkbox = $(this);
+                  console.log(checkbox.prop('checked'));
+                  checkbox.prop('checked', false);
+                  console.log(checkbox.prop('checked'));
+                  checkbox.siblings('ul').attr('style', 'display:none;').slideUp(300);
+              });
+            });
+            $('#expandAllButton').on('click', function(){
+                //detect change in the input[type="checkbox"] value
+                $('.cd-accordion-menu :input[type="checkbox"]').each(function(){
+                  var checkbox = $(this);
+                  console.log(checkbox.prop('checked'));
+                  checkbox.prop('checked', true);
+                  console.log(checkbox.prop('checked'));
+                  checkbox.siblings('ul').attr('style', 'display:none;').slideDown(300);
+              });
+            });
+
+            accordionsMenu.each(function(){
+              var accordion = $(this);
+              //detect change in the input[type="checkbox"] value
+              accordion.on('change', 'input[type="checkbox"]', function(){
+                var checkbox = $(this);
+                console.log(checkbox.prop('checked'));
+                ( checkbox.prop('checked') ) ? checkbox.siblings('ul').attr('style', 'display:none;').slideDown(300) : checkbox.siblings('ul').attr('style', 'display:block;').slideUp(300);
+              });
+            });
+
+
+
+          }
+        });
+    </script>
+
+
+
+
+{%endblock%}
