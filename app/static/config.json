@@ -1,22 +1,22 @@
 [
     {
-        "email": "admin@cisco.com",
+        "email": "admin@yahoo.com",
         "password": "password",
         "privledge": 3
     },
     {
-        "email": "jgaltman@cisco.com",
-        "password": "joe",
+        "email": "firstuser@gmail.com",
+        "password": "wooooo",
         "privledge": 2
     },
     {
-        "email": "josephg28@gmail.com",
+        "email": "seconduser@myspace.com",
         "password": "1",
         "privledge": 0
     },
     {
-        "email": "derek@cisco.com",
-        "password": "Cisco123",
+        "email": "user@hotmail.com",
+        "password": "password",
         "privledge": 1
     }
 ]

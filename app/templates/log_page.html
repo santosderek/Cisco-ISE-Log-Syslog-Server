@@ -50,11 +50,10 @@
 
                   {% set severity_of_log = log['severity_of_log'] %}
                   {% set timestamp = log['Time'] %}
-                  {% set failed_step = log.items()[0] %}
+                  {% set final_step = 'Final ' + log['Final Step'] %}
 
                   <input type="checkbox" class="allFields" name ="sub-group-{{log['position_in_list']}}" id="sub-group-{{log['position_in_list']}}">
-                  <label class={{severity_of_log}} for="sub-group-{{log['position_in_list']}}">{{timestamp}} | {{failed_step}}</label>
-                  <!-- <label for="sub-group-{{log['position_in_list']}}">{{timestamp}}</label> -->
+                  <label class={{severity_of_log}} for="sub-group-{{log['position_in_list']}}">{{timestamp}} | {{final_step[:17]}}</label>
 
                   <ul>
 
@@ -80,18 +79,7 @@
                                 {% set severity_code = step_codes[split_key2[1]][3].upper() + ' : '%}
                               {%endif%}
                             {%endif%}
-                            <!-- {% if key == 'Last Step' %}
-                              {% set last_step = value[5:5] %}
-                              {% if last_step in step_codes%}
-                                {% if step_codes[last_step][3].lower()  == 'error' or step_codes[last_step][3].lower()[:4] == 'warn' %}
-                                  {% set class_code = 'error' %}
-                                {%endif%}
-                                {{value[11:]}}
-                                {% if not value[11:] == 'UNKNOWN'%}
-                                  {% set severity_code = step_codes[split_key2[1]][3].upper() + ' : '%}
-                                {%endif%}
-                              {%endif%}
-                            {%endif%} -->
+
                             <tr class = {{class_code}} >
                               <td>{{key}}</td>
                               <td>{{severity_code}}{{value}} </td>
