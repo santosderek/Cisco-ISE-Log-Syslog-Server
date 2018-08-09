@@ -57,6 +57,7 @@ def parse_data(log):
 
             elif item:
                 if item[0] == 'Step' and item[1] in step_codes:
+                    #print steps prior to saving them
                     LOGGER.debug('STEP: ' + item[0] + '_' + item[1])
                     LOGGER.debug(
                         'CODE: ' + step_codes[item[1]][1] + ' - ' + step_codes[item[1]][2])
@@ -64,14 +65,17 @@ def parse_data(log):
                                                                  ][1] + ' - ' + step_codes[item[1]][2]
                     Final_Step = item[0] + ' ' + item[1] + ' - ' + \
                         step_codes[item[1]][1] + ' - ' + step_codes[item[1]][2]
+                    #saving final step to appear first
                     ret_val['Final Step'] = Final_Step
 
                 elif item[0] == 'Step':
+                	#check for unknown step values
                     LOGGER.debug('UNKNOWN STEP: ' + item[0] + '_' + item[1])
                     result[item[0] + '_' + item[1]] = 'UNKNOWN'
                     Final_Step = item[0] + ' ' + item[1] + '- UNKNOWN'
                     ret_val['Final Step'] = Final_Step
                 else:
+                	#saving all other logs
                     LOGGER.debug('NORMAL: ' + item[0] + ' : ' + item[1])
                     result[item[0]] = item[1]
 
