@@ -49,9 +49,11 @@ Windows
 ***Within root project directory***
 
 *Build docker container:*
+
     docker build -t cisco-syslog .
 
 *Run docker container*
+
      docker run -d --name cisco -p 8514:8514/udp -p 8066:80/tcp cisco-syslog
     
 ***Now project is accessible through http://<ip address>:80***
