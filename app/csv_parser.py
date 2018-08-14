@@ -9,7 +9,7 @@ step_codes = defaultdict(list)
 
 def parse_csv(file_name):
     global step_codes
-    with open(file_name, 'r') as current_file:
+    with open(file_name, 'r', encoding='utf-8') as current_file:
     # open file, read it
         data = current_file.read()
         # Split the data by endlines
