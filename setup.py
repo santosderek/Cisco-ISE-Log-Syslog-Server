@@ -6,5 +6,6 @@ setup(name='ISE',
       description='ISE.',
       install_requires=[
           'flask',
+          'requests'
       ]
       )
