@@ -12,15 +12,12 @@ def parse_data(log):
         Both 'Radius-Accounting' and 'CISE_System_Statistics' have simular log
         syles so they can be used in the same regular expression.
     """
-# log_template = '<181>Jul 24 13:36:09 dahouck-ise CISE_RADIUS_Accounting 0000008174 1 0 2018-07-24 13:36:09.866 -04:00 0000106784 3002 NOTICE Radius-Accounting: RADIUS Accounting watchdog update, ConfigVersionId=74, Device IP Address=10.118.113.194, RequestLatency=8, NetworkDeviceName=homeswitch, User-Name=isetest, NAS-IP-Address=10.118.113.194, Service-Type=Framed, Acct-Status-Type=Interim-Update, Acct-Delay-Time=0, Acct-Session-Id=00000000, Acct-Authentic=RADIUS, AcsSessionID=dahouck-ise/321208428/4380, SelectedAccessService=Default Network Access, Step=11004, Step=11017, Step=11117, Step=15049, Step=15008, Step=15048, Step=15048, Step=22094, Step=11005, NetworkDeviceGroups=IPSEC#Is IPSEC Device#No, NetworkDeviceGroups=Location#All Locations, NetworkDeviceGroups=Device Type#All Device Types, CPMSessionID=0a7a6d90J8ZQ4Q0Wj8O6yGEBwbw87i0wurpQFN25LsVzqaxV_So, Model Name=3560-CG, Network Device Profile=Cisco, Location=Location#All Locations, Device Type=Device Type#All Device Types, IPSEC=IPSEC#Is IPSEC Device#No,'
+
 
     if re.search('(Radius-Accounting: RADIUS Accounting)', log):
 
-        # TODO : depending on 'CISE_System_Statistics' or 'Radius-Accounting' split using ',' or ';'
         result = {}
         ret_val = {}
-        # Regular expression to find 'information'='information' lines within commas
-        # TIME STAMP REGEX : \w{3}\s\d{2}\s\d{2}:\d{2}:\d{2}
 
         search = log.split(',')
 
@@ -28,7 +25,6 @@ def parse_data(log):
             '[\w{3}|\d{2}]\s\d{2}\s\d{2}:\d{2}:\d{2}', search[0])
         exact_time = re.findall(
             '\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{3}', search[0])
-        print(search[0])
         result['Time'] = timestamp[0]
         result['Exact Time'] = exact_time[0]
         # Go through each found item in search and split them using the '='

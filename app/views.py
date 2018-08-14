@@ -56,8 +56,7 @@ def index():
             """ Create a device group """
             device_group = None
 
-            if device_group == None:
-                print ("Works")
+
 
             device_group = Device_Group()
             for pos, log in enumerate(json_data):

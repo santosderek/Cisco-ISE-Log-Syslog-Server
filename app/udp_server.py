@@ -67,5 +67,4 @@ def initialize_udp_server(polling_interval=0.5, host_ip='0.0.0.0', port=8514):
         LOGGER.info(e)
 
     except KeyboardInterrupt:
-        #print("Crtl+C Pressed. Shutting down.")
         LOGGER.info('Shutting down UDP Server.')

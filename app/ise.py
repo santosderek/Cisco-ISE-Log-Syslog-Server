@@ -24,7 +24,6 @@ class Device_Group():
                 """ Return since it was found """
                 return
 
-            # TODO: add mac address
 
         """ If now found then append the device """
         new_device = Device(ip_address=log['Device IP Address'],
